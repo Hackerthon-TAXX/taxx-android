@@ -6,11 +6,17 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.android.taxx.config.BaseActivity
 import com.android.taxx.databinding.ActivityLoginBinding
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.KakaoSdk
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
     private val TAG = "debugging"
@@ -19,6 +25,54 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        KakaoSdk.init(this, "96905163f2197d62cdad7ea15601df79")
+
+        binding.btnKakao.setOnClickListener {
+            kakaoLogin()
+        }
+    }
+
+    private fun kakaoLogin(){
+        // 카카오톡 설치 확인
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
+            // 카카오톡 로그인
+            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+                // 로그인 실패 부분
+                if (error != null) {
+                    Log.e(TAG, "앱 로그인 실패 $error")
+                    // 사용자가 취소
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled ) {
+                        return@loginWithKakaoTalk
+                    }
+                    // 다른 오류
+                    else {
+                        UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoEmailCb) // 카카오 이메일 로그인
+                    }
+                }
+                // 로그인 성공 부분
+                else if (token != null) {
+                    Log.d(TAG, "앱 로그인 성공 ${token.accessToken}")
+//                    val intent = Intent(this,MainActivity::class.java)
+//                    startActivity(intent)
+                }
+            }
+        } else {
+            UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoEmailCb) // 카카오 이메일 로그인
+        }
+    }
+
+
+
+    // 카카오톡 이메일 로그인 콜백
+    private val kakaoEmailCb: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+        if (error != null) {
+            Log.e(TAG, "이메일 로그인 실패 $error")
+        } else if (token != null) {
+            Log.d(TAG, "이메일 로그인 성공 ${token.accessToken}")
+//            val intent = Intent(this,MainActivity::class.java)
+//            startActivity(intent)
+        }
     }
 
     // 위치 권한 확인
