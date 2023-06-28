@@ -1,4 +1,4 @@
-package com.android.taxx
+package com.android.taxx.presentation
 
 import android.content.Context
 import android.content.DialogInterface
@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AlertDialog
+import com.android.taxx.R
 import com.android.taxx.config.BaseActivity
 import com.android.taxx.databinding.ActivitySplashBinding
 import com.android.taxx.util.LoadingDialog
@@ -22,9 +23,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-
             // 스플래시 끝난뒤 LoadingDialog 띄우기
-            dialog.show(supportFragmentManager,"dialog")
+            dialog.show(supportFragmentManager, "dialog")
 
             if (!isNetworkConnected(this)) {
                 // 네트워크 검사 끝났으면 LoadingDialog 내리기
@@ -33,14 +33,16 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("")
                     .setMessage("네트워크에 연결되지 않았습니다.")
-                    .setPositiveButton("다시 시도하기",
+                    .setPositiveButton(
+                        "다시 시도하기",
                         DialogInterface.OnClickListener { dialog, id ->
                             // 앱 처음부터 다시시작
                             val intent = Intent(applicationContext, SplashActivity::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
                             finish()
-                        })
+                        }
+                    )
                 builder.show()
             } else {
                 // 네트워크 검사 끝났으면 LoadingDialog 내리기
@@ -66,6 +68,4 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             else -> false
         }
     }
-
-
 }

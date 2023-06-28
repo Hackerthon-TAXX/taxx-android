@@ -1,4 +1,4 @@
-package com.android.taxx
+package com.android.taxx.presentation
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -16,11 +16,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     private val TAG = "debugging"
     private val LC_OK = 0
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
     }
 
     // 위치 권한 확인
@@ -37,7 +35,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LC_OK)
                 }
                 builder.setNegativeButton("취소") { dialog, which ->
-
                 }
                 builder.show()
             } else {
@@ -54,7 +51,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                         startActivity(intent)
                     }
                     builder.setNegativeButton("취소") { dialog, which ->
-
                     }
                     builder.show()
                 }

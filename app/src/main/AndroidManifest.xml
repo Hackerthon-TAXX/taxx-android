@@ -20,9 +20,10 @@
         tools:targetApi="31">
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="96905163f2197d62cdad7ea15601df79" />
 
-        <activity android:name=".SplashActivity"
+        <activity android:name=".presentation.SplashActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,13 +32,15 @@
 
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:name=".presentation.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
