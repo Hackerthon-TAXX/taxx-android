@@ -2,26 +2,18 @@ package com.android.taxx.presentation.quickrequest
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityQuickRequestBinding
-import com.android.taxx.model.findridermodel.FindRiderResponse
 import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.model.quickrequest.Size
 import com.android.taxx.presentation.addressweb.AddressWebActivity
-import com.android.taxx.presentation.quickrequest.network.FindRiderAPI
 import com.android.taxx.presentation.selectrider.SelectriderActivity
-import com.android.taxx.util.RetrofitInterface
 import com.android.taxx.util.binding.BindingActivity
 import com.android.taxx.util.extensions.setSingleOnClickListener
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class QuickRequestActivity :
     BindingActivity<ActivityQuickRequestBinding>(R.layout.activity_quick_request) {
-
 
     private val TAG = "debugging"
 
@@ -49,10 +41,9 @@ class QuickRequestActivity :
 
         binding.tvQuickRequestCall.setSingleOnClickListener {
             postFormData.request = binding.etRequestText.text.toString()
-            val intent = Intent(this,SelectriderActivity::class.java)
+            val intent = Intent(this, SelectriderActivity::class.java)
             startActivity(intent)
         }
-
     }
 
     private val getSearchStartResult =
@@ -64,9 +55,9 @@ class QuickRequestActivity :
                     postFormData.startLongitude = results.data!!.getStringExtra("y")!!.toDouble()
                     binding.etQuickRequestStart.setText(addressName)
 
-                    if(binding.etQuickRequestStart.text.isNotBlank() && binding.etQuickRequestEnd.text.isNotBlank()){
+                    if (binding.etQuickRequestStart.text.isNotBlank() && binding.etQuickRequestEnd.text.isNotBlank()) {
                         binding.tvQuickRequestCall.setBackgroundResource(R.drawable.shape_red_fill_10_rect)
-                    }else{
+                    } else {
                         binding.tvQuickRequestCall.setBackgroundResource(R.drawable.shape_gray_fill_10_rect)
                     }
                 }
@@ -81,9 +72,9 @@ class QuickRequestActivity :
                     postFormData.arrivalLongitude = results.data!!.getStringExtra("y")!!.toDouble()
                     binding.etQuickRequestEnd.setText(addressName)
 
-                    if(binding.etQuickRequestStart.text.isNotBlank() && binding.etQuickRequestEnd.text.isNotBlank()){
+                    if (binding.etQuickRequestStart.text.isNotBlank() && binding.etQuickRequestEnd.text.isNotBlank()) {
                         binding.tvQuickRequestCall.setBackgroundResource(R.drawable.shape_red_fill_10_rect)
-                    }else{
+                    } else {
                         binding.tvQuickRequestCall.setBackgroundResource(R.drawable.shape_gray_fill_10_rect)
                     }
                 }
