@@ -10,7 +10,7 @@
             android:id="@+id/cl_main_top"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="@color/taxx_yellow"
+            android:background="@drawable/shape_red_appbar"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -19,28 +19,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/ic_taxi"
+                android:src="@drawable/main_top_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_taxx_logo"
-                app:layout_constraintBottom_toBottomOf="@id/iv_main_taxi"
-                app:layout_constraintStart_toEndOf="@+id/iv_main_taxi" />
 
             <ImageView
                 android:id="@+id/iv_main_my_page"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="15dp"
-                android:src="@drawable/ic_my_page"
+                android:src="@drawable/main_top_profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -50,8 +44,8 @@
             android:layout_marginHorizontal="100dp"
             android:layout_marginTop="300dp"
             android:layout_marginBottom="500dp"
-            android:background="@drawable/shape_yellow_fill_10_rect"
             android:padding="20dp"
+            android:background="@drawable/shape_main_gradient"
             android:src="@drawable/ic_quick_start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
@@ -76,7 +70,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="70dp"
-            android:background="@drawable/shape_yellow_fill_10_rect"
+            android:background="@drawable/shape_main_gradient"
             android:padding="10dp"
             android:src="@drawable/ic_payment"
             app:layout_constraintDimensionRatio="1"
@@ -98,7 +92,7 @@
             android:id="@+id/iv_main_usage_history"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:background="@drawable/shape_yellow_fill_10_rect"
+            android:background="@drawable/shape_main_gradient"
             android:padding="15dp"
             android:src="@drawable/ic_usage_history"
             app:layout_constraintDimensionRatio="1"
@@ -122,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="40dp"
-            android:background="@drawable/shape_yellow_fill_10_rect"
+            android:background="@drawable/shape_main_gradient"
             android:padding="15dp"
             android:src="@drawable/ic_announcement"
             app:layout_constraintDimensionRatio="1"

@@ -11,14 +11,17 @@
             android:id="@+id/cl_pickup_request_top"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="@color/taxx_yellow"
+            android:background="@drawable/shape_red_appbar"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/iv_quick_request_back"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back_btn"
+                android:layout_marginStart="18dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -27,7 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="@string/quick_request_nav"
+                android:text="퀵 요청"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +46,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="70dp"
-            android:background="@drawable/shape_yellow_line_10_rect"
-            android:padding="10dp"
+            android:background="@drawable/shape_red_line_10_rect"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_pickup_request_top">
@@ -76,7 +84,7 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/taxx_yellow"
+                android:background="#FF8A5C"
                 app:layout_constraintTop_toBottomOf="@+id/et_quick_request_start" />
 
             <ImageView
@@ -119,12 +127,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_quick_request"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="@id/cl_quick_request"
-            app:layout_constraintStart_toStartOf="@id/cl_quick_request"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_quick_request_size"
             tools:listitem="@layout/item_quick_request" />
 
@@ -133,11 +143,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="150dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="150dp"
             android:background="@drawable/shape_gray_fill_10_rect"
             android:gravity="center"
             android:paddingVertical="10dp"
-            android:text="호출하기"
+            android:text="다음"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/rv_quick_request" />

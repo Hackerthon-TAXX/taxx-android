@@ -13,16 +13,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/loadingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Loading ..."
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/btn_cancel"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:src="@drawable/loading_dialog_btn"
+        app:layout_constraintTop_toBottomOf="@id/iv_loading"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_loading" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
