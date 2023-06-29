@@ -13,6 +13,7 @@ class LoadingDialog : DialogFragment() {
 
     private var _binding : DialogLoadingBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
