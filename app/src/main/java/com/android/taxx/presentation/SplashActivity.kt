@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import com.android.taxx.R
 import com.android.taxx.config.BaseActivity
 import com.android.taxx.databinding.ActivitySplashBinding
+import com.android.taxx.presentation.login.LoginActivity
 import com.android.taxx.util.LoadingDialog
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
