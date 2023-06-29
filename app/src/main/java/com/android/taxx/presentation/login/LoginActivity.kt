@@ -1,4 +1,4 @@
-package com.android.taxx.presentation
+package com.android.taxx.presentation.login
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -12,14 +12,22 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.android.taxx.config.BaseActivity
 import com.android.taxx.databinding.ActivityLoginBinding
-import com.android.taxx.presentation.main.MainActivity
+import com.android.taxx.model.checkusermodel.CheckuserResponse
+import com.android.taxx.model.makeusermodel.MakeuserPostData
+import com.android.taxx.model.makeusermodel.MakeuserResponse
+import com.android.taxx.model.postformmodel.postFormData
+import com.android.taxx.presentation.login.network.CheckuserAPI
+import com.android.taxx.presentation.login.network.MakeuserAPI
 import com.android.taxx.presentation.selectrider.SelectriderActivity
-import com.android.taxx.util.paymentdialog.PaymentDialog
+import com.android.taxx.util.RetrofitInterface
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
     private val TAG = "debugging"
@@ -56,10 +64,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 // 로그인 성공 부분
                 else if (token != null) {
                     Log.d(TAG, "앱 로그인 성공 ${token.accessToken}")
-                    val intent = Intent(this,SelectriderActivity::class.java)
-                    startActivity(intent)
-//                    val intent = Intent(this,MainActivity::class.java)
-//                    startActivity(intent)
+                    kakaoData()
                 }
             }
         } else {
@@ -75,9 +80,97 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             Log.e(TAG, "이메일 로그인 실패 $error")
         } else if (token != null) {
             Log.d(TAG, "이메일 로그인 성공 ${token.accessToken}")
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            kakaoData()
         }
+    }
+
+
+    // 로그인 유저정보 불러오기
+    private fun kakaoData(){
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e(TAG, "사용자 정보 요청 실패 $error")
+            } else if (user != null) {
+                Log.d(TAG, "사용자 정보 요청 성공 : $user")
+
+                val birthday = user.kakaoAccount?.birthday
+                val email = user.kakaoAccount?.email
+                val age = user.kakaoAccount?.ageRange.toString()
+                val image = user.kakaoAccount?.profile?.profileImageUrl
+
+                val uuid = user.id
+                val name = user.kakaoAccount?.profile?.nickname
+
+                if(uuid != null && name != null){
+                    postFormData.uuid = uuid
+                    val datas = MakeuserPostData(uuid,name)
+                    checkUser(datas)
+                }
+            }
+        }
+    }
+
+    // 존재하는 유저면 페이지이동
+    // 존재하지 않는 유저면 유저생성 함수 호출
+    private fun checkUser(datas : MakeuserPostData?){
+
+        Log.d(TAG,"${datas!!.id}")
+        RetrofitInterface().getInstance().create(CheckuserAPI::class.java)
+            .checkUser(datas!!.id).enqueue(object: Callback<CheckuserResponse>{
+                override fun onResponse(
+                    call: Call<CheckuserResponse>,
+                    response: Response<CheckuserResponse>
+                ) {
+                    Log.d(TAG, response.raw().toString())
+                    if( response.body() != null){
+                        if(response.body()!!.success){
+                            Log.d(TAG,response.body().toString())
+                            val intent = Intent(this@LoginActivity, SelectriderActivity::class.java)
+                            startActivity(intent)
+//                        val intent = Intent(this,MainActivity::class.java)
+//                        startActivity(intent)
+                        }else{
+                            if( datas != null){
+                                postUserData(datas)
+                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<CheckuserResponse>, t: Throwable) {
+                }
+            })
+    }
+
+
+    // 존재하지 않는 유저면 유저생성 API.
+    // 성공시 페이지 이동
+    private fun postUserData(datas : MakeuserPostData){
+        Log.d(TAG,"send data ${datas}")
+        RetrofitInterface().getInstance().create(MakeuserAPI::class.java)
+            .postMakeuser(datas).enqueue(object: Callback<MakeuserResponse>{
+                override fun onResponse(
+                    call: Call<MakeuserResponse>,
+                    response: Response<MakeuserResponse>
+                ) {
+                    Log.d(TAG, response.raw().toString())
+
+                    if(response.body() != null){
+                        Log.d(TAG, response.body().toString())
+                    }
+
+                    if(response.code() == 201){
+                        val intent = Intent(this@LoginActivity, SelectriderActivity::class.java)
+                        startActivity(intent)
+//                        val intent = Intent(this,MainActivity::class.java)
+//                        startActivity(intent)
+                    }
+                }
+                override fun onFailure(call: Call<MakeuserResponse>, t: Throwable) {
+                    Log.d(TAG,t.message.toString())
+                }
+            })
+
     }
 
     // 위치 권한 확인

@@ -1,7 +1,7 @@
 package com.android.taxx.util.paymentdialog
 
-import com.android.taxx.model.paymentdialogmodel.PaymentDialogData
+import com.android.taxx.model.paymentmodel.PaymentListData
 
 interface OnPaymentClick {
-    fun onClick(item : PaymentDialogData)
+    fun onClick(item : PaymentListData)
 }
