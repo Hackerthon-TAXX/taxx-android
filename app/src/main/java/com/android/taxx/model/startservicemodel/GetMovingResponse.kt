@@ -9,5 +9,6 @@ data class RiderLocationData(
     val id : Int,
     val latitude : Double,
     val longitude : Double,
-    val distance : Long
+    val distance : Long,
+    val text : String
 )

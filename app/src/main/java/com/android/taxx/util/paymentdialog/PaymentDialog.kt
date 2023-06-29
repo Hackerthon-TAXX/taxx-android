@@ -60,17 +60,12 @@ class PaymentDialog : BottomSheetDialogFragment(),OnPaymentClick {
     }
 
     private fun postRequest(){
-//        val formDatas = RequestPostData(postFormData.uuid,postFormData.ridersId, postFormData.size,
-//        postFormData.request, postFormData.payments, postFormData.startLongitude, postFormData.startLatitude,
-//        postFormData.arrivalLatitue,postFormData.arrivalLongitude)
+        val formDatas = RequestPostData(postFormData.uuid,postFormData.ridersId, postFormData.size,
+        postFormData.request, postFormData.payments, postFormData.startAddress,postFormData.endAddress)
 
-        val testDatas = RequestPostData(postFormData.uuid,1, "중",
-            postFormData.request, postFormData.payments, 100.0, 20.0,
-            20.0,20.0)
-
-        Log.d(TAG,testDatas.toString())
+        Log.d(TAG,formDatas.toString())
         RetrofitInterface().getInstance().create(RequestAPI::class.java)
-            .postRequest(testDatas).enqueue(object: Callback<RequestResponse>{
+            .postRequest(formDatas).enqueue(object: Callback<RequestResponse>{
                 override fun onResponse(
                     call: Call<RequestResponse>,
                     response: Response<RequestResponse>

@@ -52,6 +52,7 @@ class RiderAdapter(
                     link.changeBtnRed()
                 }
 
+                postFormData.ridersId = item.id
                 postFormData.riderName = item.name
                 postFormData.riderDistance = item.distance
                 postFormData.riderRating = item.rate.toString()
