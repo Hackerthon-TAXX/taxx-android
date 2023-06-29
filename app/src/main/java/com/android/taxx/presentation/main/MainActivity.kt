@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityMainBinding
 import com.android.taxx.presentation.mypage.MyPageActivity
+import com.android.taxx.presentation.payment.PaymentActivity
 import com.android.taxx.presentation.quickrequest.QuickRequestActivity
 import com.android.taxx.presentation.usagehistory.UsageHistoryActivity
 import com.android.taxx.util.binding.BindingActivity
@@ -19,7 +20,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun initClickListener() {
         binding.ivMainPayment.setSingleOnClickListener {
-            // TODO 결제 수단 화면
+            val intentToPayment = Intent(this, PaymentActivity::class.java)
+            startActivity(intentToPayment)
         }
         binding.ivMainAnnouncement.setSingleOnClickListener {
             // TODO 공지사항 웹 뷰
