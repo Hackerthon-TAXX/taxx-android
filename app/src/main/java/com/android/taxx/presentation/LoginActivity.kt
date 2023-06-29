@@ -56,8 +56,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 // 로그인 성공 부분
                 else if (token != null) {
                     Log.d(TAG, "앱 로그인 성공 ${token.accessToken}")
-                    val intent = Intent(this,MainActivity::class.java)
+                    val intent = Intent(this,SelectriderActivity::class.java)
                     startActivity(intent)
+//                    val intent = Intent(this,MainActivity::class.java)
+//                    startActivity(intent)
                 }
             }
         } else {

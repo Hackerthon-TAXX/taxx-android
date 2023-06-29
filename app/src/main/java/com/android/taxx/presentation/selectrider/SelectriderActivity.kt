@@ -12,13 +12,12 @@ import com.android.taxx.util.paymentdialog.PaymentDialog
 class SelectriderActivity : BaseActivity<ActivitySelectRiderBinding>(ActivitySelectRiderBinding::inflate){
 
 
-    val data1 = RiderData("김철중", R.drawable.rider,"210m","5.0","(12)",false)
+    val data1 = RiderData("김철중", R.drawable.rider,"210m","5.0","(12)","White")
     val datas = arrayOf(data1,data1,data1,data1,data1,data1,data1,data1,data1,data1,data1,data1,data1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         makeRecycler()
-
 
         binding.btnCall.setOnClickListener {
             val bottomSheet = PaymentDialog()
@@ -32,7 +31,6 @@ class SelectriderActivity : BaseActivity<ActivitySelectRiderBinding>(ActivitySel
         binding.recyclerRiders.adapter = adapter
         binding.recyclerRiders.layoutManager = LinearLayoutManager(this)
     }
-
 
 
 }

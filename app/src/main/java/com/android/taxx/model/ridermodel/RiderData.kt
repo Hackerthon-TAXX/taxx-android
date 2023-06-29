@@ -6,5 +6,5 @@ data class RiderData(
     val distance : String,
     val rating : String,
     val reviewCount : String,
-    val clicked : Boolean
+    var clicked : String
 )
