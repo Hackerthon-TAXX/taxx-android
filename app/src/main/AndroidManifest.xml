@@ -37,6 +37,17 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity android:name=".presentation.selectrider.SelectriderActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".presentation.main.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true"

@@ -1,6 +1,7 @@
 package com.android.taxx.util.paymentdialog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.taxx.R
 import com.android.taxx.databinding.DialogPaymentBinding
 import com.android.taxx.model.paymentdialogmodel.PaymentDialogData
+import com.android.taxx.util.LoadingDialog
 import com.android.taxx.util.paymentdialog.adapter.PaymentDialogAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class PaymentDialog : BottomSheetDialogFragment() {
+class PaymentDialog : BottomSheetDialogFragment(),OnPaymentClick {
 
     private var _binding : DialogPaymentBinding? =null
     private val binding get() = _binding!!
+    private val dialog = LoadingDialog()
+    private val TAG = "debugging"
+
     val data1 = PaymentDialogData(R.drawable.payment_dialog_toss)
     val data2 = PaymentDialogData(R.drawable.payment_dialog_kapay)
     val data3 = PaymentDialogData(R.drawable.payment_dialog_uri)
@@ -33,10 +38,14 @@ class PaymentDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PaymentDialogAdapter(requireContext(), datas)
+        val adapter = PaymentDialogAdapter(this, datas)
         binding.recyclerPayment.adapter = adapter
         binding.recyclerPayment.layoutManager = LinearLayoutManager(context)
 
-
     }
+
+    override fun onClick(item: PaymentDialogData) {
+        dialog.show(parentFragmentManager,"loading")
+    }
+
 }

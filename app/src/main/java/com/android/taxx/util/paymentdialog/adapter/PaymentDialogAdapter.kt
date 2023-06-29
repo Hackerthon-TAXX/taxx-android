@@ -1,15 +1,16 @@
 package com.android.taxx.util.paymentdialog.adapter
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.taxx.databinding.ItemDialogpaymentCardsBinding
 import com.android.taxx.model.paymentdialogmodel.PaymentDialogData
+import com.android.taxx.util.paymentdialog.OnPaymentClick
 
-class PaymentDialogAdapter(val context : Context, val datas : List<PaymentDialogData>)
+class PaymentDialogAdapter(val link : OnPaymentClick, val datas : List<PaymentDialogData>)
     : RecyclerView.Adapter<PaymentDialogAdapter.ViewHolder>(){
-
+    private val TAG = "debugging"
 
     inner class ViewHolder(private val viewBinding: ItemDialogpaymentCardsBinding)
         : RecyclerView.ViewHolder(viewBinding.root){
@@ -18,6 +19,9 @@ class PaymentDialogAdapter(val context : Context, val datas : List<PaymentDialog
         // 데이터 (coinPriceList) 를 view에 삽입
         fun bind(item : PaymentDialogData){
             viewBinding.ivCard.setImageResource(item.img)
+            viewBinding.layout.setOnClickListener {
+                link.onClick(item)
+            }
         }
 
 

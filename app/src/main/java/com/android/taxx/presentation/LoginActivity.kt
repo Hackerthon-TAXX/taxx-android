@@ -12,6 +12,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.android.taxx.config.BaseActivity
 import com.android.taxx.databinding.ActivityLoginBinding
+import com.android.taxx.presentation.main.MainActivity
+import com.android.taxx.presentation.selectrider.SelectriderActivity
 import com.android.taxx.util.paymentdialog.PaymentDialog
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
@@ -54,8 +56,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 // 로그인 성공 부분
                 else if (token != null) {
                     Log.d(TAG, "앱 로그인 성공 ${token.accessToken}")
-//                    val intent = Intent(this,MainActivity::class.java)
-//                    startActivity(intent)
+                    val intent = Intent(this,MainActivity::class.java)
+                    startActivity(intent)
                 }
             }
         } else {
@@ -71,8 +73,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             Log.e(TAG, "이메일 로그인 실패 $error")
         } else if (token != null) {
             Log.d(TAG, "이메일 로그인 성공 ${token.accessToken}")
-//            val intent = Intent(this,MainActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
