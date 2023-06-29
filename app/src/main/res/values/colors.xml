@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="taxx_yellow">#FFFFEF5F</color>
     <color name="taxx_gray">#FFD3D3D3</color>
+    <color name="taxx_dark_gray">#FF969696</color>
     <color name="taxx_red">#FF0000</color>
     <color name="taxx_lightgray">#D8D8D8</color>
 </resources>

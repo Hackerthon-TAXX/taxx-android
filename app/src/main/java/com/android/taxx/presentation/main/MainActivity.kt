@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityMainBinding
+import com.android.taxx.presentation.mypage.MyPageActivity
 import com.android.taxx.presentation.quickrequest.QuickRequestActivity
 import com.android.taxx.presentation.usagehistory.UsageHistoryActivity
 import com.android.taxx.util.binding.BindingActivity
@@ -28,7 +29,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             startActivity(intentToQuickRequest)
         }
         binding.ivMainMyPage.setSingleOnClickListener {
-            // TODO 마이 페이지
+            val intentToMyPage = Intent(this, MyPageActivity::class.java)
+            startActivity(intentToMyPage)
         }
         binding.ivMainUsageHistory.setSingleOnClickListener {
             val intentToUsageHistory = Intent(this, UsageHistoryActivity::class.java)
