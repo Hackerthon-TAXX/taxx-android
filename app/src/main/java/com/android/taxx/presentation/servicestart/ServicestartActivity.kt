@@ -2,8 +2,10 @@ package com.android.taxx.presentation.servicestart
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.android.taxx.config.BaseActivity
 import com.android.taxx.databinding.ActivityServiceStartBinding
+import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.model.startservicemodel.GetMovingResponse
 import com.android.taxx.model.startservicemodel.MarkerData
 import com.android.taxx.model.startservicemodel.RiderLocationData
@@ -14,22 +16,23 @@ import net.daum.mf.map.api.MapPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.Socket
 
 class ServicestartActivity : BaseActivity<ActivityServiceStartBinding>(ActivityServiceStartBinding::inflate) {
 
     private val TAG = "debugging"
     private var distance = 1500L
     private var startDistance = 1500L
+    private var text = ""
     private var status = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        val Data = RiderLocationData(1,36.7503046,127.2920744,0)
-        val Data2 = RiderLocationData(1, 36.7,127.29,0)
+        val Data = RiderLocationData(postFormData.ridersId,postFormData.startLatitude,postFormData.startLongitude,0,"test")
+        val Data2 = RiderLocationData(postFormData.ridersId, postFormData.arrivalLatitue,postFormData.arrivalLongitude,0,"test")
         startThread(Data,Data2)
-
     }
+
 
     private fun getMovingRider(data : RiderLocationData){
         RetrofitInterface().getInstance().create(GetmovingAPI::class.java)
@@ -43,6 +46,7 @@ class ServicestartActivity : BaseActivity<ActivityServiceStartBinding>(ActivityS
                         Log.d(TAG, response.body().toString())
                         val startData = MarkerData("출발", response.body()!!.data.latitude, response.body()!!.data.longitude)
                         val endData = MarkerData("도착", data.latitude,data.longitude)
+                        text = response.body()!!.data.text
                         distance = response.body()!!.data.distance
                         setMarkers(startData, endData)
                     }
@@ -81,6 +85,7 @@ class ServicestartActivity : BaseActivity<ActivityServiceStartBinding>(ActivityS
             if(status){
                 binding.mapView.fitMapViewAreaToShowAllPOIItems()
                 binding.mapView.zoomOut(true)
+                startDistance = distance
                 status = false
             }
         }
@@ -88,17 +93,29 @@ class ServicestartActivity : BaseActivity<ActivityServiceStartBinding>(ActivityS
 
     private fun startThread(startData : RiderLocationData, endData : RiderLocationData){
         Thread{
-            val bar = binding.progress
+            val bar = binding.progressBar
             while(distance > 500){
                 getMovingRider(startData)
                 runOnUiThread {
-                    binding.tvDistance.text = "기사님께서 출발지까지 ${distance}km 남았습니다"
+                    binding.tvDistance.text = text
+                    val percent = ((startDistance.toDouble() - distance.toDouble()) / startDistance.toDouble()) * 50
+                    bar.progress = percent.toInt()
                 }
-                Thread.sleep(1500)
+                Thread.sleep(500)
             }
-            distance = 200000
+            bar.progress = 50
             status = true
-            Thread.sleep(1000)
+            distance = 600
+
+            runOnUiThread {
+
+                binding.tvAnnounce.text = "기사님이 물품을 수령 했습니다."
+                binding.tvDistance.visibility = View.INVISIBLE
+                binding.tvAnnounce3.visibility = View.INVISIBLE
+                binding.tvAnnounce2.text = "기사님꼐서 곧 출발합니다"
+            }
+
+            Thread.sleep(2000)
             startSecondThread(endData)
         }.start()
     }
@@ -106,13 +123,28 @@ class ServicestartActivity : BaseActivity<ActivityServiceStartBinding>(ActivityS
 
     private fun startSecondThread(endData : RiderLocationData){
         Thread{
+            val bar = binding.progressBar
+
+            runOnUiThread {
+
+                binding.tvAnnounce.text = "기사님이 도착지를 향해 출발 했습니다."
+                binding.tvDistance.visibility = View.VISIBLE
+                binding.tvAnnounce3.visibility = View.VISIBLE
+                binding.tvAnnounce2.text = "기사님께서 도착지까지"
+                binding.tvAnnounce3.text = "남았습니다."
+            }
+
             while(distance > 500){
                 getMovingRider(endData)
                 runOnUiThread {
-                    binding.tvDistance.text = "기사님께서 출발지까지 ${distance}km 남았습니다"
+                    binding.tvDistance.text = text
+                    val percent = ((startDistance.toDouble() - distance.toDouble()) / startDistance.toDouble()) * 50 + 50
+                    bar.progress = percent.toInt()
                 }
-                Thread.sleep(1500)
+                Thread.sleep(500)
             }
+            bar.progress = 100
         }.start()
     }
+
 }
