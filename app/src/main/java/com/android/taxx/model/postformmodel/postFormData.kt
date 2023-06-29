@@ -19,4 +19,7 @@ object postFormData {
     var arrivalLatitue = 0.0
     var arrivalLongitude = 0.0
 
+    var startAddress = ""
+    var endAddress = ""
+
 }

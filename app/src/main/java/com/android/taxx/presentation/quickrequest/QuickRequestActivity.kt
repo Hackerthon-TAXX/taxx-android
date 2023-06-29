@@ -51,6 +51,7 @@ class QuickRequestActivity :
             if (results.resultCode == RESULT_OK) {
                 if (results.data != null) {
                     val addressName = results.data!!.getStringExtra("address_name")
+                    postFormData.startAddress = addressName.toString()
                     postFormData.startLatitude = results.data!!.getStringExtra("x")!!.toDouble()
                     postFormData.startLongitude = results.data!!.getStringExtra("y")!!.toDouble()
                     binding.etQuickRequestStart.setText(addressName)
@@ -68,6 +69,7 @@ class QuickRequestActivity :
             if (results.resultCode == RESULT_OK) {
                 if (results.data != null) {
                     val addressName = results.data!!.getStringExtra("address_name")
+                    postFormData.endAddress = addressName.toString()
                     postFormData.arrivalLatitue = results.data!!.getStringExtra("x")!!.toDouble()
                     postFormData.arrivalLongitude = results.data!!.getStringExtra("y")!!.toDouble()
                     binding.etQuickRequestEnd.setText(addressName)

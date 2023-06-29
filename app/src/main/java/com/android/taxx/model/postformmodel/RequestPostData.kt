@@ -6,8 +6,6 @@ data class RequestPostData(
     var size : String,
     var request : String,
     var payments : String,
-    var startLongitude : Double,
-    var startLatitude :Double,
-    var arrivalLatitude : Double,
-    var arrivalLongitude : Double
+    var startAddress : String,
+    var arrivalAddress : String
 )
