@@ -8,6 +8,7 @@ object postFormData {
     var riderRating = ""
     var riderImg = ""
     var riderReviewCount = ""
+    var time = ""
 
     var ridersId = 0
     var size = ""
@@ -17,4 +18,5 @@ object postFormData {
     var startLatitude = 0.0
     var arrivalLatitue = 0.0
     var arrivalLongitude = 0.0
+
 }

@@ -3,154 +3,196 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_pickup_request_top"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@drawable/shape_red_appbar"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_quick_request_back"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_pickup_request_top"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_red_appbar"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_quick_request_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/back_btn"
+                    android:layout_marginStart="18dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_quick_request"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="퀵 요청"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_quick_request"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/back_btn"
-                android:layout_marginStart="18dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/shape_red_line_10_rect"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_pickup_request_top">
+
+                <ImageView
+                    android:id="@+id/iv_quick_request_start_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_start_polygon"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_quick_request_start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/et_quick_request_start" />
+
+                <EditText
+                    android:id="@+id/et_quick_request_start"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:hint="출발"
+                    android:paddingVertical="3dp"
+                    app:layout_constraintBottom_toTopOf="@+id/view_quick_request"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_quick_request_start_arrow"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view_quick_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#FF8A5C"
+                    app:layout_constraintTop_toBottomOf="@+id/et_quick_request_start" />
+
+                <ImageView
+                    android:id="@+id/iv_quick_request_end_arrow"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_end_polygon"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_quick_request_end"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/et_quick_request_end" />
+
+                <EditText
+                    android:id="@+id/et_quick_request_end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:hint="도착"
+                    android:paddingVertical="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_quick_request_end_arrow"
+                    app:layout_constraintTop_toBottomOf="@id/view_quick_request" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/tv_quick_request"
+                android:id="@+id/tv_quick_request_size"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:text="퀵 요청"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="사이즈"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/cl_quick_request"
+                app:layout_constraintTop_toBottomOf="@id/cl_quick_request" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_quick_request"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_quick_request_size"
+                tools:listitem="@layout/item_quick_request" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_quick_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/shape_red_line_10_rect"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_pickup_request_top">
-
-            <ImageView
-                android:id="@+id/iv_quick_request_start_arrow"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_start_polygon"
-                app:layout_constraintBottom_toBottomOf="@+id/et_quick_request_start"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/et_quick_request_start" />
+            <TextView
+                android:id="@+id/tv_request_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="요청 메시지"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/rv_quick_request"
+                app:layout_constraintStart_toStartOf="@id/tv_quick_request_size"/>
 
             <EditText
-                android:id="@+id/et_quick_request_start"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:background="@null"
-                android:focusable="false"
-                android:hint="출발"
-                android:paddingVertical="3dp"
-                app:layout_constraintBottom_toTopOf="@+id/view_quick_request"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_quick_request_start_arrow"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/view_quick_request"
+                android:id="@+id/et_request_text"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:background="#FF8A5C"
-                app:layout_constraintTop_toBottomOf="@+id/et_quick_request_start" />
+                android:paddingLeft="10dp"
+                android:hint="예) 물품 내용(필수), 요청 사항 등"
+                android:layout_height="50dp"
+                android:background="@drawable/shape_et_request"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_request_message"/>
 
-            <ImageView
-                android:id="@+id/iv_quick_request_end_arrow"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_end_polygon"
-                app:layout_constraintBottom_toBottomOf="@+id/et_quick_request_end"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/et_quick_request_end" />
-
-            <EditText
-                android:id="@+id/et_quick_request_end"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:text="* 20자 제한 입니다"
                 android:layout_marginTop="10dp"
-                android:background="@null"
-                android:focusable="false"
-                android:hint="도착"
-                android:paddingVertical="3dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_quick_request_end_arrow"
-                app:layout_constraintTop_toBottomOf="@id/view_quick_request" />
+                app:layout_constraintTop_toBottomOf="@id/et_request_text"
+                app:layout_constraintStart_toStartOf="@id/tv_request_message"
+                android:textColor="@color/taxx_red"/>
+            <TextView
+                android:id="@+id/tv_quick_request_call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="150dp"
+                android:layout_marginTop="180dp"
+                android:background="@drawable/shape_gray_fill_10_rect"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="다음"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/rv_quick_request" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/tv_quick_request_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="사이즈"
-            android:textColor="@color/black"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/cl_quick_request"
-            app:layout_constraintTop_toBottomOf="@id/cl_quick_request" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_quick_request"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_quick_request_size"
-            tools:listitem="@layout/item_quick_request" />
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/tv_quick_request_call"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="150dp"
-            android:layout_marginTop="150dp"
-            android:background="@drawable/shape_gray_fill_10_rect"
-            android:gravity="center"
-            android:paddingVertical="10dp"
-            android:text="다음"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/rv_quick_request" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

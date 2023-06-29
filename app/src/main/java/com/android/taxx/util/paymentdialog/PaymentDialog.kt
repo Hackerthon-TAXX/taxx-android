@@ -35,7 +35,6 @@ class PaymentDialog : BottomSheetDialogFragment(),OnPaymentClick {
     private val dialog = LoadingDialog()
     private val TAG = "debugging"
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,7 +65,7 @@ class PaymentDialog : BottomSheetDialogFragment(),OnPaymentClick {
 //        postFormData.arrivalLatitue,postFormData.arrivalLongitude)
 
         val testDatas = RequestPostData(postFormData.uuid,1, "중",
-            "조심히 다뤄주세요", postFormData.payments, 100.0, 20.0,
+            postFormData.request, postFormData.payments, 100.0, 20.0,
             20.0,20.0)
 
         Log.d(TAG,testDatas.toString())

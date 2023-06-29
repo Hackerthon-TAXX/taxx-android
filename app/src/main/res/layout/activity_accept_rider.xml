@@ -140,6 +140,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="도착 예상 시간 : 5분"
