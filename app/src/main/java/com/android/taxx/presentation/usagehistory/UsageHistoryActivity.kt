@@ -10,6 +10,7 @@ import com.android.taxx.model.usagehistory.UsageHistory
 import com.android.taxx.model.usagehistory.UsageHistoryResponse
 import com.android.taxx.presentation.usagehistory.network.GetUsageHistory
 import com.android.taxx.util.RetrofitInterface
+import com.android.taxx.util.extensions.setSingleOnClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +25,7 @@ class UsageHistoryActivity : AppCompatActivity() {
         binding = ActivityUsageHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getUsageHistory()
+        initBackButton()
     }
 
     private fun initAdapter() {
@@ -53,5 +55,8 @@ class UsageHistoryActivity : AppCompatActivity() {
                     Log.d(TAG, "${t.message}")
                 }
             })
+    }
+    private fun initBackButton() {
+        binding.ivUsageHistoryBack.setSingleOnClickListener { finish() }
     }
 }

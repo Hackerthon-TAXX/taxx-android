@@ -27,6 +27,7 @@ class QuickRequestActivity :
         super.onCreate(savedInstanceState)
         initClickListener()
         initAdapter()
+        initBackButton()
     }
 
     private fun initClickListener() {
@@ -86,5 +87,8 @@ class QuickRequestActivity :
     private fun initAdapter() {
         val quickRequestSizeAdapter = QuickRequestSizeAdapter(this, boxSizeList)
         binding.rvQuickRequest.adapter = quickRequestSizeAdapter
+    }
+    private fun initBackButton() {
+        binding.ivQuickRequestBack.setSingleOnClickListener { finish() }
     }
 }
