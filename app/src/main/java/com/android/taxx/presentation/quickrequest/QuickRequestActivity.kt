@@ -6,6 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityQuickRequestBinding
 import com.android.taxx.presentation.addressweb.AddressWebActivity
+import com.android.taxx.presentation.selectrider.SelectriderActivity
 import com.android.taxx.util.binding.BindingActivity
 import com.android.taxx.util.extensions.setSingleOnClickListener
 
@@ -24,6 +25,11 @@ class QuickRequestActivity :
         binding.etQuickRequestEnd.setSingleOnClickListener {
             val intent = Intent(this, AddressWebActivity::class.java)
             getSearchEndResult.launch(intent)
+        }
+
+        binding.tvQuickRequestCall.setSingleOnClickListener { 
+            val intent = Intent(this, SelectriderActivity::class.java)
+            startActivity(intent)
         }
     }
 

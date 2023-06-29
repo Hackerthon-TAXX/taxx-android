@@ -18,6 +18,7 @@ import com.android.taxx.model.makeusermodel.MakeuserResponse
 import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.presentation.login.network.CheckuserAPI
 import com.android.taxx.presentation.login.network.MakeuserAPI
+import com.android.taxx.presentation.main.MainActivity
 import com.android.taxx.presentation.selectrider.SelectriderActivity
 import com.android.taxx.util.RetrofitInterface
 import com.kakao.sdk.auth.model.OAuthToken
@@ -125,10 +126,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     if( response.body() != null){
                         if(response.body()!!.success){
                             Log.d(TAG,response.body().toString())
-                            val intent = Intent(this@LoginActivity, SelectriderActivity::class.java)
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
-//                        val intent = Intent(this,MainActivity::class.java)
-//                        startActivity(intent)
                         }else{
                             if( datas != null){
                                 postUserData(datas)
@@ -160,10 +159,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     }
 
                     if(response.code() == 201){
-                        val intent = Intent(this@LoginActivity, SelectriderActivity::class.java)
+                        val intent = Intent(this@LoginActivity,MainActivity::class.java)
                         startActivity(intent)
-//                        val intent = Intent(this,MainActivity::class.java)
-//                        startActivity(intent)
                     }
                 }
                 override fun onFailure(call: Call<MakeuserResponse>, t: Throwable) {
