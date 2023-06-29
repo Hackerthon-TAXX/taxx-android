@@ -8,16 +8,18 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@drawable/shape_yellow_appbar"
+        android:background="@drawable/shape_red_appbar"
         android:elevation="5dp"
-        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/back_btn"/>
 
         <View
             android:layout_width="0dp"
@@ -27,8 +29,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="배송현황"
-            android:textColor="@color/black"
+            android:text="배송 현황"
+            android:textSize="18sp"
+            android:textColor="@color/white"
             android:textStyle="bold"/>
 
         <View
@@ -65,7 +68,6 @@
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
             android:progress="100"
             android:progressBackgroundTint="#EBEBEB"
             android:progressTint="#FF8A5C"
@@ -78,9 +80,8 @@
             android:layout_marginTop="15dp"
             android:text="기사님께서 출발지까지 500m 남았습니다"
             android:layout_marginBottom="20dp"/>
-    </LinearLayout>ght="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
+
+    </LinearLayout>
 
     <net.daum.mf.map.api.MapView
         android:id="@+id/map_view"

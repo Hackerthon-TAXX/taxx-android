@@ -5,30 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".src.splash.SplashActivity">
-
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/splash_background"
-        android:scaleType="centerCrop"/>
-
+    android:backgroundTint="@color/taxx_red"
+    tools:context=".presentation.SplashActivity">
 
     <ImageView
-        android:id="@+id/iv_text1"
-        android:layout_width="180dp"
-        android:layout_height="200dp"
-        android:src="@drawable/splash_text1"
+        android:layout_width="220dp"
+        android:layout_height="330dp"
+        android:src="@drawable/splash_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-        android:id="@+id/iv_text2"
-        android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:src="@drawable/splash_text2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
