@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityMainBinding
 import com.android.taxx.presentation.quickrequest.QuickRequestActivity
+import com.android.taxx.presentation.usagehistory.UsagehistoryActivity
 import com.android.taxx.util.binding.BindingActivity
 import com.android.taxx.util.extensions.setSingleOnClickListener
 
@@ -30,7 +31,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             // TODO 마이 페이지
         }
         binding.ivMainUsageHistory.setSingleOnClickListener {
-            // TODO 이용내역 페이지
+            val intent = Intent(this, UsagehistoryActivity::class.java)
+            startActivity(intent)
         }
     }
 }
