@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/shape_yellow_appbar"
         android:elevation="5dp"
         android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal">
 
         <ImageView
@@ -24,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주문상태"
+            android:text="배송현황"
             android:textColor="@color/black"
             android:textStyle="bold"/>
 
@@ -38,5 +41,52 @@
             android:layout_height="0dp"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:text="기사님이 출발지에서 출발 했습니다."/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:progress="100"
+            android:progressBackgroundTint="#EBEBEB"
+            android:progressTint="#FF8A5C"
+            android:scaleY="3" />
+
+        <TextView
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="기사님께서 출발지까지 500m 남았습니다"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>ght="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+    <net.daum.mf.map.api.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_second"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
