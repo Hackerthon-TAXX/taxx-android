@@ -1,31 +1,31 @@
 package com.android.taxx.presentation.selectrider.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.taxx.config.App
 import com.android.taxx.databinding.ItemSelectriderRidersBinding
 import com.android.taxx.model.findridermodel.RiderInfoData
 import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.presentation.selectrider.SelectriderActivity
 import com.bumptech.glide.Glide
 
-class RiderAdapter(val context : Context, val datas : ArrayList<RiderInfoData>, val link : SelectriderActivity.RoomToAdapter)
-    : RecyclerView.Adapter<RiderAdapter.ViewHolder>(){
+class RiderAdapter(
+    val context: Context,
+    val datas: ArrayList<RiderInfoData>,
+    val link: SelectriderActivity.RoomToAdapter
+) : RecyclerView.Adapter<RiderAdapter.ViewHolder>() {
 
     private val TAG = "debugging"
     var selectPos = -1
 
-    inner class ViewHolder(private val viewBinding: ItemSelectriderRidersBinding)
-        : RecyclerView.ViewHolder(viewBinding.root){
+    inner class ViewHolder(private val viewBinding: ItemSelectriderRidersBinding) :
+        RecyclerView.ViewHolder(viewBinding.root) {
 
         // check 표시여부 저장할 데이터사이즈와 동일한 크기의 배열 생성.
-        var checkarr= Array(datas.size){false}
+        var checkarr = Array(datas.size) { false }
 
-        fun bind(item : RiderInfoData){
+        fun bind(item: RiderInfoData) {
             Glide.with(context)
                 .load(item.image)
                 .into(viewBinding.ivRider)
@@ -35,18 +35,18 @@ class RiderAdapter(val context : Context, val datas : ArrayList<RiderInfoData>, 
             viewBinding.tvReviewCount.text = "(" + item.count.toString() + ")"
             viewBinding.ratingBar.rating = item.rate
 
-            if(checkarr[absoluteAdapterPosition]){
+            if (checkarr[absoluteAdapterPosition]) {
                 viewBinding.layout.cardElevation = 20F
-            }else{
+            } else {
                 viewBinding.layout.cardElevation = 0F
             }
 
             viewBinding.layout.setOnClickListener {
-                if(checkarr[absoluteAdapterPosition]){
+                if (checkarr[absoluteAdapterPosition]) {
                     viewBinding.layout.cardElevation = 0F
                     checkarr[absoluteAdapterPosition] = false
                     link.changeBtnGray()
-                }else{
+                } else {
                     viewBinding.layout.cardElevation = 20F
                     checkarr[absoluteAdapterPosition] = true
                     link.changeBtnRed()
@@ -58,15 +58,13 @@ class RiderAdapter(val context : Context, val datas : ArrayList<RiderInfoData>, 
                 postFormData.riderReviewCount = item.count.toString()
                 postFormData.riderImg = item.image
                 postFormData.time = item.time
-
             }
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewBinding = ItemSelectriderRidersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val viewBinding =
+            ItemSelectriderRidersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(viewBinding)
     }
 
@@ -77,6 +75,4 @@ class RiderAdapter(val context : Context, val datas : ArrayList<RiderInfoData>, 
     override fun getItemCount(): Int {
         return datas.size
     }
-
-
 }

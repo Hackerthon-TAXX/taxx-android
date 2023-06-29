@@ -17,19 +17,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SelectriderActivity : BaseActivity<ActivitySelectRiderBinding>(ActivitySelectRiderBinding::inflate){
-
+class SelectriderActivity :
+    BaseActivity<ActivitySelectRiderBinding>(ActivitySelectRiderBinding::inflate) {
 
     var datas = arrayListOf<RiderInfoData>()
     private val TAG = "debugging"
 
-    inner class RoomToAdapter(){
+    inner class RoomToAdapter() {
 
-        fun changeBtnRed(){
+        fun changeBtnRed() {
             binding.btnCall.setBackgroundResource(R.drawable.shape_red_fill_10_rect)
         }
 
-        fun changeBtnGray(){
+        fun changeBtnGray() {
             binding.btnCall.setBackgroundResource(R.drawable.shape_gray_fill_10_rect)
         }
     }
@@ -42,39 +42,37 @@ class SelectriderActivity : BaseActivity<ActivitySelectRiderBinding>(ActivitySel
             val bottomSheet = PaymentDialog()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
         }
-
     }
 
-    private fun postStartLocation(){
+    private fun postStartLocation() {
         RetrofitInterface().getInstance().create(FindRiderAPI::class.java)
-            .findRider(postFormData.startLatitude, postFormData.startLongitude).enqueue(object:
-                Callback<FindRiderResponse> {
-                override fun onResponse(
-                    call: Call<FindRiderResponse>,
-                    response: Response<FindRiderResponse>
-                ) {
-                    Log.d(TAG,"${response.raw()}")
+            .findRider(postFormData.startLatitude, postFormData.startLongitude).enqueue(object :
+                    Callback<FindRiderResponse> {
+                    override fun onResponse(
+                        call: Call<FindRiderResponse>,
+                        response: Response<FindRiderResponse>
+                    ) {
+                        Log.d(TAG, "${response.raw()}")
 
-                    if(response.body() != null){
-                        Log.d(TAG,"${response.body()!!.data}")
-                        if(response.body()!!.success){
-                            datas = response.body()!!.data
-                            makeRecycler()
-                        }else{
-                            Log.d(TAG,"false")
+                        if (response.body() != null) {
+                            Log.d(TAG, "${response.body()!!.data}")
+                            if (response.body()!!.success) {
+                                datas = response.body()!!.data
+                                makeRecycler()
+                            } else {
+                                Log.d(TAG, "false")
+                            }
                         }
                     }
-                }
-                override fun onFailure(call: Call<FindRiderResponse>, t: Throwable) {
-                }
-            })
+
+                    override fun onFailure(call: Call<FindRiderResponse>, t: Throwable) {
+                    }
+                })
     }
 
-    fun makeRecycler(){
-        val adapter = RiderAdapter(this,datas,RoomToAdapter())
+    fun makeRecycler() {
+        val adapter = RiderAdapter(this, datas, RoomToAdapter())
         binding.recyclerRiders.adapter = adapter
         binding.recyclerRiders.layoutManager = LinearLayoutManager(this)
     }
-
-
 }
