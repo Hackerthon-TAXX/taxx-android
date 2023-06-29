@@ -7,7 +7,11 @@
     <string name="main_usage_history">이용내역</string>
     <string name="main_announcment">공지사항</string>
 
+    <!-- Quick Request -->
+    <string name="quick_request_nav">퀵 요청하기</string>
+
     <!-- Util -->
     <string name="null_point_exception">NullPointException occurs..</string>
     <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르면 종료됩니다</string>
+    <string name="binding_error">Binding not initialized to reference the view.</string>
 </resources>
