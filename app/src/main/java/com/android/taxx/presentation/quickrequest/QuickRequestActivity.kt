@@ -1,6 +1,7 @@
 package com.android.taxx.presentation.quickrequest
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import com.android.taxx.R
@@ -27,7 +28,6 @@ class QuickRequestActivity :
         super.onCreate(savedInstanceState)
         initClickListener()
         initAdapter()
-        initBackButton()
     }
 
     private fun initClickListener() {
@@ -56,7 +56,10 @@ class QuickRequestActivity :
                     postFormData.startLatitude = results.data!!.getStringExtra("x")!!.toDouble()
                     postFormData.startLongitude = results.data!!.getStringExtra("y")!!.toDouble()
                     binding.etQuickRequestStart.setText(addressName)
-
+                    updateButton(
+                        binding.etQuickRequestStart.text.isNullOrBlank(),
+                        binding.etQuickRequestEnd.text.isNullOrBlank()
+                    )
                     if (binding.etQuickRequestStart.text.isNotBlank() && binding.etQuickRequestEnd.text.isNotBlank()) {
                         binding.tvQuickRequestCall.setBackgroundResource(R.drawable.shape_red_fill_10_rect)
                     } else {
@@ -74,7 +77,10 @@ class QuickRequestActivity :
                     postFormData.arrivalLatitue = results.data!!.getStringExtra("x")!!.toDouble()
                     postFormData.arrivalLongitude = results.data!!.getStringExtra("y")!!.toDouble()
                     binding.etQuickRequestEnd.setText(addressName)
-
+                    updateButton(
+                        binding.etQuickRequestStart.text.isNullOrBlank(),
+                        binding.etQuickRequestEnd.text.isNullOrBlank()
+                    )
                     if (binding.etQuickRequestStart.text.isNotBlank() && binding.etQuickRequestEnd.text.isNotBlank()) {
                         binding.tvQuickRequestCall.setBackgroundResource(R.drawable.shape_red_fill_10_rect)
                     } else {
@@ -88,7 +94,8 @@ class QuickRequestActivity :
         val quickRequestSizeAdapter = QuickRequestSizeAdapter(this, boxSizeList)
         binding.rvQuickRequest.adapter = quickRequestSizeAdapter
     }
-    private fun initBackButton() {
-        binding.ivQuickRequestBack.setSingleOnClickListener { finish() }
+
+    private fun updateButton(start: Boolean, end: Boolean) {
+        if (start && end) binding.tvQuickRequestCall.setBackgroundColor(Color.parseColor("#FF8A5C"))
     }
 }
