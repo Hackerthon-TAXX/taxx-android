@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityMainBinding
+import com.android.taxx.presentation.announcement.AnnouncementActivity
 import com.android.taxx.presentation.mypage.MyPageActivity
 import com.android.taxx.presentation.payment.PaymentActivity
 import com.android.taxx.presentation.quickrequest.QuickRequestActivity
@@ -15,7 +16,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initClickListener()
-        // TODO initBackPressedCallback()
     }
 
     private fun initClickListener() {
@@ -24,7 +24,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             startActivity(intentToPayment)
         }
         binding.ivMainAnnouncement.setSingleOnClickListener {
-            // TODO 공지사항 웹 뷰
+            val intentToAnnouncement = Intent(this, AnnouncementActivity::class.java)
+            startActivity(intentToAnnouncement)
         }
         binding.ivMainQuickStart.setSingleOnClickListener {
             val intentToQuickRequest = Intent(this, QuickRequestActivity::class.java)

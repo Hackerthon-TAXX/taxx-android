@@ -10,7 +10,8 @@ import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.presentation.servicestart.ServicestartActivity
 import com.bumptech.glide.Glide
 
-class AcceptriderAcitivity : BaseActivity<ActivityAcceptRiderBinding>(ActivityAcceptRiderBinding::inflate){
+class AcceptriderAcitivity :
+    BaseActivity<ActivityAcceptRiderBinding>(ActivityAcceptRiderBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +26,9 @@ class AcceptriderAcitivity : BaseActivity<ActivityAcceptRiderBinding>(ActivityAc
         binding.tvRiderName.text = postFormData.riderName
         binding.tvTime.text = "도착 예상 시간 : " + postFormData.time
 
-
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, ServicestartActivity::class.java)
             startActivity(intent)
         }, 3000)
     }
-
 }

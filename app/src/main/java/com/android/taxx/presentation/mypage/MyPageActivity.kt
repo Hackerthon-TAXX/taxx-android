@@ -5,6 +5,7 @@ import android.util.Log
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityMyPageBinding
 import com.android.taxx.util.binding.BindingActivity
+import com.android.taxx.util.extensions.setSingleOnClickListener
 import com.bumptech.glide.Glide
 import com.kakao.sdk.user.UserApiClient
 
@@ -13,6 +14,7 @@ class MyPageActivity : BindingActivity<ActivityMyPageBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         updateKakaoData()
+        initBackButton()
     }
 
     private fun setCircleImage(imgUrl: String?) {
@@ -49,5 +51,9 @@ class MyPageActivity : BindingActivity<ActivityMyPageBinding>(R.layout.activity_
         binding.tvMyPageName.text = name
         binding.tvMyPageEmail.text = email
         setCircleImage(image)
+    }
+
+    private fun initBackButton() {
+        binding.ivMyPageBack.setSingleOnClickListener { finish() }
     }
 }
