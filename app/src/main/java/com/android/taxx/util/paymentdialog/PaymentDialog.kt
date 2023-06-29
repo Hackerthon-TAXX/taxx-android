@@ -1,14 +1,23 @@
 package com.android.taxx.util.paymentdialog
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.taxx.R
 import com.android.taxx.databinding.DialogPaymentBinding
 import com.android.taxx.model.paymentdialogmodel.PaymentDialogData
+import com.android.taxx.presentation.LoginActivity
+import com.android.taxx.presentation.SplashActivity
+import com.android.taxx.presentation.acceptrider.AcceptriderAcitivity
 import com.android.taxx.util.LoadingDialog
 import com.android.taxx.util.paymentdialog.adapter.PaymentDialogAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -46,6 +55,10 @@ class PaymentDialog : BottomSheetDialogFragment(),OnPaymentClick {
 
     override fun onClick(item: PaymentDialogData) {
         dialog.show(parentFragmentManager,"loading")
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(requireContext(), AcceptriderAcitivity::class.java)
+            startActivity(intent)
+        }, 3000)
     }
 
 }
