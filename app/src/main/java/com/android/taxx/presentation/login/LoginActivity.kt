@@ -19,7 +19,6 @@ import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.presentation.login.network.CheckuserAPI
 import com.android.taxx.presentation.login.network.MakeuserAPI
 import com.android.taxx.presentation.main.MainActivity
-import com.android.taxx.presentation.selectrider.SelectriderActivity
 import com.android.taxx.util.RetrofitInterface
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
@@ -45,7 +44,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         }
     }
 
-    private fun kakaoLogin(){
+    private fun kakaoLogin() {
         // 카카오톡 설치 확인
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
             // 카카오톡 로그인
@@ -54,12 +53,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 if (error != null) {
                     Log.e(TAG, "앱 로그인 실패 $error")
                     // 사용자가 취소
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled ) {
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         return@loginWithKakaoTalk
                     }
                     // 다른 오류
                     else {
-                        UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoEmailCb) // 카카오 이메일 로그인
+                        UserApiClient.instance.loginWithKakaoAccount(
+                            this,
+                            callback = kakaoEmailCb
+                        ) // 카카오 이메일 로그인
                     }
                 }
                 // 로그인 성공 부분
@@ -69,11 +71,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 }
             }
         } else {
-            UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoEmailCb) // 카카오 이메일 로그인
+            UserApiClient.instance.loginWithKakaoAccount(
+                this,
+                callback = kakaoEmailCb
+            ) // 카카오 이메일 로그인
         }
     }
-
-
 
     // 카카오톡 이메일 로그인 콜백
     private val kakaoEmailCb: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -85,9 +88,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         }
     }
 
-
     // 로그인 유저정보 불러오기
-    private fun kakaoData(){
+    private fun kakaoData() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e(TAG, "사용자 정보 요청 실패 $error")
@@ -102,9 +104,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 val uuid = user.id
                 val name = user.kakaoAccount?.profile?.nickname
 
-                if(uuid != null && name != null){
+                if (uuid != null && name != null) {
                     postFormData.uuid = uuid
-                    val datas = MakeuserPostData(uuid,name)
+                    val datas = MakeuserPostData(uuid, name)
                     checkUser(datas)
                 }
             }
@@ -113,23 +115,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     // 존재하는 유저면 페이지이동
     // 존재하지 않는 유저면 유저생성 함수 호출
-    private fun checkUser(datas : MakeuserPostData?){
-
-        Log.d(TAG,"${datas!!.id}")
+    private fun checkUser(datas: MakeuserPostData?) {
+        Log.d(TAG, "${datas!!.id}")
         RetrofitInterface().getInstance().create(CheckuserAPI::class.java)
-            .checkUser(datas!!.id).enqueue(object: Callback<CheckuserResponse>{
+            .checkUser(datas!!.id).enqueue(object : Callback<CheckuserResponse> {
                 override fun onResponse(
                     call: Call<CheckuserResponse>,
                     response: Response<CheckuserResponse>
                 ) {
                     Log.d(TAG, response.raw().toString())
-                    if( response.body() != null){
-                        if(response.body()!!.success){
-                            Log.d(TAG,response.body().toString())
+                    if (response.body() != null) {
+                        if (response.body()!!.success) {
+                            Log.d(TAG, response.body().toString())
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
-                        }else{
-                            if( datas != null){
+                        } else {
+                            if (datas != null) {
                                 postUserData(datas)
                             }
                         }
@@ -141,47 +142,58 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             })
     }
 
-
     // 존재하지 않는 유저면 유저생성 API.
     // 성공시 페이지 이동
-    private fun postUserData(datas : MakeuserPostData){
-        Log.d(TAG,"send data ${datas}")
+    private fun postUserData(datas: MakeuserPostData) {
+        Log.d(TAG, "send data $datas")
         RetrofitInterface().getInstance().create(MakeuserAPI::class.java)
-            .postMakeuser(datas).enqueue(object: Callback<MakeuserResponse>{
+            .postMakeuser(datas).enqueue(object : Callback<MakeuserResponse> {
                 override fun onResponse(
                     call: Call<MakeuserResponse>,
                     response: Response<MakeuserResponse>
                 ) {
                     Log.d(TAG, response.raw().toString())
 
-                    if(response.body() != null){
+                    if (response.body() != null) {
                         Log.d(TAG, response.body().toString())
                     }
 
-                    if(response.code() == 201){
-                        val intent = Intent(this@LoginActivity,MainActivity::class.java)
+                    if (response.code() == 201) {
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                     }
                 }
+
                 override fun onFailure(call: Call<MakeuserResponse>, t: Throwable) {
-                    Log.d(TAG,t.message.toString())
+                    Log.d(TAG, t.message.toString())
                 }
             })
-
     }
 
     // 위치 권한 확인
     private fun permissionCheck() {
         val preference = getPreferences(MODE_PRIVATE)
         val isFirstCheck = preference.getBoolean("isFirstPermissionCheck", true)
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             // 권한이 없는 상태
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
                 // 권한 거절 (다시 한 번 물어봄)
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("현재 위치를 확인하시려면 위치 권한을 허용해주세요.")
                 builder.setPositiveButton("확인") { dialog, which ->
-                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LC_OK)
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        LC_OK
+                    )
                 }
                 builder.setNegativeButton("취소") { dialog, which ->
                 }
@@ -190,13 +202,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 if (isFirstCheck) {
                     // 최초 권한 요청
                     preference.edit().putBoolean("isFirstPermissionCheck", false).apply()
-                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LC_OK)
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        LC_OK
+                    )
                 } else {
                     // 다시 묻지 않음 클릭 (앱 정보 화면으로 이동)
                     val builder = AlertDialog.Builder(this)
                     builder.setMessage("현재 위치를 확인하시려면 설정에서 위치 권한을 허용해주세요.")
                     builder.setPositiveButton("설정으로 이동") { dialog, which ->
-                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
+                        val intent = Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:$packageName")
+                        )
                         startActivity(intent)
                     }
                     builder.setNegativeButton("취소") { dialog, which ->
@@ -208,7 +227,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     // 권한 요청 후 행동
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LC_OK) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
