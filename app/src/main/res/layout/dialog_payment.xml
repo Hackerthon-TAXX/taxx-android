@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="25dp"
+        android:textSize="15sp"
+        android:text="결제금액 : 7,800원"
+        android:textColor="@color/black"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <ImageView
+        android:id="@+id/iv_add_card"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/payment_dialog_bottomlayout"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+
+
+
+</LinearLayout>

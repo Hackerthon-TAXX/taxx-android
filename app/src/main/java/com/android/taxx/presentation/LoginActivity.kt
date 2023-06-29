@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.android.taxx.config.BaseActivity
 import com.android.taxx.databinding.ActivityLoginBinding
+import com.android.taxx.util.paymentdialog.PaymentDialog
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
