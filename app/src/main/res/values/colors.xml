@@ -12,4 +12,5 @@
     <color name="taxx_dark_gray">#FF969696</color>
     <color name="taxx_red">#FF0000</color>
     <color name="taxx_lightgray">#D8D8D8</color>
+    <color name="taxx_orange">#FFFF8A5C</color>
 </resources>

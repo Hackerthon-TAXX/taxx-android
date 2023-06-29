@@ -12,6 +12,7 @@ import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.presentation.quickrequest.network.FindRiderAPI
 import com.android.taxx.presentation.selectrider.adapter.RiderAdapter
 import com.android.taxx.util.RetrofitInterface
+import com.android.taxx.util.extensions.setSingleOnClickListener
 import com.android.taxx.util.paymentdialog.PaymentDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +38,7 @@ class SelectriderActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         postStartLocation()
+        initBackButton()
 
         binding.btnCall.setOnClickListener {
             val bottomSheet = PaymentDialog()
@@ -74,5 +76,9 @@ class SelectriderActivity :
         val adapter = RiderAdapter(this, datas, RoomToAdapter())
         binding.recyclerRiders.adapter = adapter
         binding.recyclerRiders.layoutManager = LinearLayoutManager(this)
+    }
+
+    fun initBackButton() {
+        binding.ivBack.setSingleOnClickListener { finish() }
     }
 }
