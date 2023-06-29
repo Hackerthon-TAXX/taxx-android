@@ -58,7 +58,8 @@
 
         <activity android:name=".presentation.quickrequest.QuickRequestActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.taxx.databinding.ItemQuickRequestBinding
+import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.model.quickrequest.Size
 
 class QuickRequestSizeAdapter(context: Context, private val boxSizeList: List<Size>) :
@@ -29,6 +30,9 @@ class QuickRequestSizeAdapter(context: Context, private val boxSizeList: List<Si
         fun onBind(data: Size) {
             binding.ivQuickRequestItem.setImageResource(data.image)
             binding.tvQuickRequestItem.text = data.size
+            binding.rootview.setOnClickListener {
+                postFormData.size = data.size
+            }
         }
     }
 }

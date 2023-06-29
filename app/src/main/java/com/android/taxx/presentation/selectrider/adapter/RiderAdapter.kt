@@ -6,12 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.android.taxx.config.App
 import com.android.taxx.databinding.ItemSelectriderRidersBinding
+import com.android.taxx.model.findridermodel.RiderInfoData
 import com.android.taxx.model.postformmodel.postFormData
-import com.android.taxx.model.ridermodel.RiderData
 import com.android.taxx.presentation.selectrider.SelectriderActivity
+import com.bumptech.glide.Glide
 
-class RiderAdapter(val context : Context, val datas : Array<RiderData>)
+class RiderAdapter(val context : Context, val datas : ArrayList<RiderInfoData>, val link : SelectriderActivity.RoomToAdapter)
     : RecyclerView.Adapter<RiderAdapter.ViewHolder>(){
 
     private val TAG = "debugging"
@@ -23,12 +25,15 @@ class RiderAdapter(val context : Context, val datas : Array<RiderData>)
         // check 표시여부 저장할 데이터사이즈와 동일한 크기의 배열 생성.
         var checkarr= Array(datas.size){false}
 
-        fun bind(item : RiderData){
-            viewBinding.ivRider.setImageResource(item.img)
+        fun bind(item : RiderInfoData){
+            Glide.with(context)
+                .load(item.image)
+                .into(viewBinding.ivRider)
             viewBinding.tvRiderName.text = item.name
             viewBinding.tvDistance.text = item.distance
-            viewBinding.tvRating.text = item.rating
-            viewBinding.tvReviewCount.text = item.reviewCount
+            viewBinding.tvRating.text = item.rate.toString()
+            viewBinding.tvReviewCount.text = "(" + item.count.toString() + ")"
+            viewBinding.ratingBar.rating = item.rate
 
             if(checkarr[absoluteAdapterPosition]){
                 viewBinding.layout.cardElevation = 20F
@@ -40,16 +45,19 @@ class RiderAdapter(val context : Context, val datas : Array<RiderData>)
                 if(checkarr[absoluteAdapterPosition]){
                     viewBinding.layout.cardElevation = 0F
                     checkarr[absoluteAdapterPosition] = false
+                    link.changeBtnGray()
                 }else{
                     viewBinding.layout.cardElevation = 20F
                     checkarr[absoluteAdapterPosition] = true
+                    link.changeBtnRed()
                 }
 
                 postFormData.riderName = item.name
                 postFormData.riderDistance = item.distance
-                postFormData.riderRating = item.rating
-                postFormData.riderReviewCount = item.reviewCount
-                postFormData.riderImg = "url"
+                postFormData.riderRating = item.rate.toString()
+                postFormData.riderReviewCount = item.count.toString()
+                postFormData.riderImg = item.image
+                postFormData.time = item.time
 
             }
         }
