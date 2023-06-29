@@ -48,6 +48,18 @@
 
         </activity>
 
+        <activity android:name=".presentation.addressweb.AddressWebActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".presentation.quickrequest.QuickRequestActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <activity android:name=".presentation.acceptrider.AcceptriderAcitivity"
             android:exported="true"
             android:screenOrientation="portrait">

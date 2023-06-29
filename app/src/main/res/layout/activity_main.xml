@@ -9,9 +9,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_main_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:background="@color/taxx_yellow"
-            android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
