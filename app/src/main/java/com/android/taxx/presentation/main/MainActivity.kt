@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.android.taxx.R
 import com.android.taxx.databinding.ActivityMainBinding
 import com.android.taxx.presentation.quickrequest.QuickRequestActivity
+import com.android.taxx.presentation.usagehistory.UsageHistoryActivity
 import com.android.taxx.util.binding.BindingActivity
 import com.android.taxx.util.extensions.setSingleOnClickListener
 
@@ -23,14 +24,15 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             // TODO 공지사항 웹 뷰
         }
         binding.ivMainQuickStart.setSingleOnClickListener {
-            val intent = Intent(this, QuickRequestActivity::class.java)
-            startActivity(intent)
+            val intentToQuickRequest = Intent(this, QuickRequestActivity::class.java)
+            startActivity(intentToQuickRequest)
         }
         binding.ivMainMyPage.setSingleOnClickListener {
             // TODO 마이 페이지
         }
         binding.ivMainUsageHistory.setSingleOnClickListener {
-            // TODO 이용내역 페이지
+            val intentToUsageHistory = Intent(this, UsageHistoryActivity::class.java)
+            startActivity(intentToUsageHistory)
         }
     }
 }
