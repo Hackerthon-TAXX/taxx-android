@@ -22,7 +22,6 @@ class RiderAdapter(
     inner class ViewHolder(private val viewBinding: ItemSelectriderRidersBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
-        // check 표시여부 저장할 데이터사이즈와 동일한 크기의 배열 생성.
         var checkarr = Array(datas.size) { false }
 
         fun bind(item: RiderInfoData) {

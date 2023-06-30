@@ -41,11 +41,12 @@
             android:id="@+id/iv_main_quick_start"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:elevation="10dp"
             android:layout_marginHorizontal="100dp"
             android:layout_marginTop="300dp"
             android:layout_marginBottom="500dp"
+            android:background="@drawable/shape_white_fill_5_rect"
             android:padding="20dp"
-            android:background="@drawable/shape_main_gradient"
             android:src="@drawable/ic_quick_start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
@@ -59,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/main_quick_start"
-            android:textSize="15sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_main_quick_start" />
@@ -84,6 +86,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/main_payment"
             android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/iv_main_payment"
             app:layout_constraintStart_toStartOf="@+id/iv_main_payment"
             app:layout_constraintTop_toBottomOf="@+id/iv_main_payment" />
@@ -107,6 +110,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/main_usage_history"
             android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/iv_main_usage_history"
             app:layout_constraintStart_toStartOf="@+id/iv_main_usage_history"
             app:layout_constraintTop_toBottomOf="@+id/iv_main_usage_history" />
@@ -130,6 +134,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/main_announcment"
             android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/iv_main_announcement"
             app:layout_constraintStart_toStartOf="@+id/iv_main_announcement"
             app:layout_constraintTop_toBottomOf="@+id/iv_main_announcement" />
