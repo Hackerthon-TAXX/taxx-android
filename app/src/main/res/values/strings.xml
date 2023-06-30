@@ -3,7 +3,7 @@
 
     <!-- Main -->
     <string name="main_payment">결제수단</string>
-    <string name="main_quick_start">퀵 스타트</string>
+    <string name="main_quick_start">퀵 요청</string>
     <string name="main_usage_history">이용내역</string>
     <string name="main_announcment">공지사항</string>
 

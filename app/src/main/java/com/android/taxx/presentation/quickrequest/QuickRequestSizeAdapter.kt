@@ -1,10 +1,10 @@
 package com.android.taxx.presentation.quickrequest
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.android.taxx.R
 import com.android.taxx.databinding.ItemQuickRequestBinding
 import com.android.taxx.model.quickrequest.Size
 
@@ -34,12 +34,8 @@ class QuickRequestSizeAdapter(context: Context, private val boxSizeList: List<Si
             binding.tvQuickRequestItem.text = data.size
 
             itemView.setOnClickListener {
-                it.setBackgroundColor(Color.parseColor("#FF8A5C"))
+                it.setBackgroundResource(R.drawable.shape_orange_fill_10_rect)
             }
         }
     }
-}
-
-fun interface ItemClickListener<T> {
-    fun onClick(pos: Int, item: T)
 }
