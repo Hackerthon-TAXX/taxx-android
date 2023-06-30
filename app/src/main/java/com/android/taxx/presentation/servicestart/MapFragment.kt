@@ -100,6 +100,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
                 markerType = MapPOIItem.MarkerType.CustomImage
                 customImageResourceId = R.drawable.marker_boxi
             }
+            endm.apply{
+                markerType = MapPOIItem.MarkerType.CustomImage
+                customImageResourceId = R.drawable.marker_arrive
+            }
         }
 
         markerArr.add(startm)
@@ -127,7 +131,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
                 val percent = ((startDistance.toDouble() - distance.toDouble()) / startDistance.toDouble()) * 50
 
                 (activity as ServicestartActivity).RoomToFrag().updateProgress(percent.toInt())
-                Thread.sleep(500)
+                Thread.sleep(150)
             }
 
             (activity as ServicestartActivity).RoomToFrag().updateProgress(50)
@@ -139,7 +143,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
             (activity as ServicestartActivity).RoomToFrag().updateAnnounce1("기사님이 물품을 수령 했습니다.")
 
             (activity as ServicestartActivity).RoomToFrag().updateAnnounce2("기사님꼐서 곧 출발합니다")
-
 
             (activity as ServicestartActivity).RoomToFrag().show1(false)
 
@@ -158,7 +161,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
 
             (activity as ServicestartActivity).RoomToFrag().show1(true)
 
-
             (activity as ServicestartActivity).RoomToFrag().updateAnnounce1("기사님이 도착지를 향해 출발 했습니다.")
 
             (activity as ServicestartActivity).RoomToFrag().updateAnnounce2( "기사님께서 도착지까지")
@@ -168,12 +170,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
 
             while(distance > 500){
                 getMovingRider(endData)
-
                 (activity as ServicestartActivity).RoomToFrag().updateDistance(text)
                 val percent = ((startDistance.toDouble() - distance.toDouble()) / startDistance.toDouble()) * 50 + 50
                 (activity as ServicestartActivity).RoomToFrag().updateProgress(percent.toInt())
 
-                Thread.sleep(500)
+                Thread.sleep(150)
             }
 
             (activity as ServicestartActivity).RoomToFrag().updateProgress(100)

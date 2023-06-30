@@ -1,11 +1,13 @@
 package com.android.taxx.presentation.quickrequest
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.taxx.R
 import com.android.taxx.databinding.ItemQuickRequestBinding
+import com.android.taxx.model.postformmodel.postFormData
 import com.android.taxx.model.quickrequest.Size
 
 class QuickRequestSizeAdapter(context: Context, private val boxSizeList: List<Size>) :
@@ -35,6 +37,7 @@ class QuickRequestSizeAdapter(context: Context, private val boxSizeList: List<Si
 
             itemView.setOnClickListener {
                 it.setBackgroundResource(R.drawable.shape_orange_fill_10_rect)
+                postFormData.size = data.size
             }
         }
     }

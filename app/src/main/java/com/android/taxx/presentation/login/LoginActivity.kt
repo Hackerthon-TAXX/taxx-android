@@ -38,7 +38,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         setContentView(binding.root)
 
         KakaoSdk.init(this, "96905163f2197d62cdad7ea15601df79")
-
         binding.btnKakao.setOnClickListener {
             kakaoLogin()
         }
@@ -75,6 +74,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 this,
                 callback = kakaoEmailCb
             ) // 카카오 이메일 로그인
+        }
+    }
+
+    // 카카오 연결 끊기
+    private fun kakaoUnlink(){
+
+        UserApiClient.instance.unlink { error ->
+            if (error != null) {
+                Log.e(TAG, "연결 끊기 실패", error)
+            }
+            else {
+                Log.d(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                val intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

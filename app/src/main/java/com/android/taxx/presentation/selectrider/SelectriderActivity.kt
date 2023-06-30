@@ -48,7 +48,7 @@ class SelectriderActivity :
 
     private fun postStartLocation() {
         RetrofitInterface().getInstance().create(FindRiderAPI::class.java)
-            .findRider(postFormData.startLatitude, postFormData.startLongitude).enqueue(object :
+            .findRider( postFormData.startLongitude,postFormData.startLatitude).enqueue(object :
                     Callback<FindRiderResponse> {
                     override fun onResponse(
                         call: Call<FindRiderResponse>,
